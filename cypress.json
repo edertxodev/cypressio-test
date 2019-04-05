@@ -1,5 +1,15 @@
 {
   "baseUrl": "https://more-recipes17.herokuapp.com/",
   "viewportHeight": 760,
-  "viewportWidth": 1023
+  "viewportWidth": 1023,
+  "env": {
+    "dev": "google.es"
+  },
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "overwrite": false,
+    "reportDir": "reports",
+    "reportFilename": "Report",
+    "code": "false"
+  }
 }

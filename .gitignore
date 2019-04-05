@@ -3,3 +3,4 @@ cypress/videos/*
 .vscode
 .idea
 cypress/screenshots/*
+reports

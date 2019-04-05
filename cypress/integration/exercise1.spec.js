@@ -3,6 +3,7 @@
 describe("Exercise 1", () => {
   before(() => {
     cy.visit("https://www.irontec.com/");
+    cy.log(Cypress.env("dev"));
   });
 
   context("Home", () => {
