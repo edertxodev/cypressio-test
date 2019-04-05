@@ -25,9 +25,41 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("login", () => {
-  cy.fixture("exercise4.json").as("UserJSON");
+  cy.fixture("defaults.json").as("UserJSON");
   cy.get("@UserJSON").then(res => {
     cy.get('input[name="username"]').type(res.username);
     cy.get('input[name="password"]').type(res.password);
+  });
+});
+
+Cypress.Commands.add("recipeLogin", () => {
+  cy.fixture("defaults.json").as("UserJSON");
+  cy.get("@UserJSON").then(res => {
+    cy.get('input[name="username"]').type(res.recipes.username);
+    cy.get('input[name="password"]').type(res.recipes.password);
+    cy.get('button[type="submit"]').click();
+  });
+});
+
+Cypress.Commands.add("recipeLogout", () => {
+  cy.get(".dropdown-button").click();
+  cy.get("#user-dropdown li a")
+    .last()
+    .click();
+});
+
+Cypress.Commands.add("recipeLoginREST", () => {
+  cy.fixture("defaults.json").as("UserJSON");
+  cy.get("@UserJSON").then(res => {
+    cy.request({
+      url: "/api/v1/users/signin",
+      method: "POST",
+      body: {
+        username: res.recipes.username,
+        password: res.recipes.password
+      }
+    }).then(res => {
+      return res.body.token;
+    });
   });
 });
